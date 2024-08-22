@@ -1,0 +1,238 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Homework",
+        "description": "文章編輯 API",
+        "contact": {
+            "email": "vincent.kh.gy@gamil.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api/",
+            "description": "LocalHost"
+        }
+    ],
+    "paths": {
+        "/": {},
+        "/posts": {
+            "get": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "取得文章列表",
+                "description": "取得文章列表",
+                "operationId": "658313eed8aeecb0c28162fa6b48fe89",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "作者查詢",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "vincent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "請求成功",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": {
+                                    "data": {
+                                        "id": 1,
+                                        "author": "vincent",
+                                        "status": "pub",
+                                        "postTitle": {
+                                            "ch": {
+                                                "postTitle": "測試1"
+                                            },
+                                            "en": {
+                                                "postTitle": "Test1"
+                                            },
+                                            "jp": {
+                                                "postTitle": "測試1"
+                                            }
+                                        },
+                                        "postContent": {
+                                            "ch": {
+                                                "postContent": "測試1"
+                                            },
+                                            "en": {
+                                                "postContent": "Test1"
+                                            },
+                                            "jp": {
+                                                "postContent": "測試1"
+                                            }
+                                        },
+                                        "created_at": "2024-08-22",
+                                        "updated_at": "2024-08-22"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "新增文章",
+                "description": "新增文章",
+                "operationId": "ad8ec79a51271c70020fc6974634fb8b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "author",
+                                    "status",
+                                    "postLangType",
+                                    "postTitle",
+                                    "postContent"
+                                ]
+                            },
+                            "example": {
+                                "author": "vincent",
+                                "status": "temp",
+                                "postLangType": "ch",
+                                "postTitle": "測試",
+                                "postContent": "測試"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        },
+        "/posts/{postId}": {
+            "put": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "修改文章",
+                "description": "修改文章",
+                "operationId": "3751026db28b82f2bb696b14c5f9e087",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "文章Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "author",
+                                    "status",
+                                    "postLangType",
+                                    "postTitle",
+                                    "postContent"
+                                ]
+                            },
+                            "example": {
+                                "author": "vincent",
+                                "status": "temp",
+                                "postLangType": "ch",
+                                "postTitle": "測試",
+                                "postContent": "測試"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "刪除文章",
+                "description": "刪除文章",
+                "operationId": "2ce11041e88f45eecd3160b204e85aa9",
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "文章Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/500"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "200": {
+                "description": "成功",
+                "content": {
+                    "application/json": {
+                        "schema": {},
+                        "example": {
+                            "msg": "success"
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "伺服器發生錯誤",
+                "content": {
+                    "application/json": {
+                        "schema": {},
+                        "example": {
+                            "msg": "error Message."
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "posts",
+            "description": "posts"
+        }
+    ]
+}
